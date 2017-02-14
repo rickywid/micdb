@@ -1,0 +1,7 @@
+.upcoming-events {
+	@include make-row();
+}
+
+.upcoming-events__inner {
+	@include make-lg-column(12);
+}

@@ -1,0 +1,13 @@
+.intro {
+	@include make-row();
+}
+
+.intro__inner {
+	@include make-lg-column(12);
+}
+
+.intro__text {
+	background-color: rgba(255,255,255,0.1);
+	margin: 20px 0;
+    padding: 20px;
+}

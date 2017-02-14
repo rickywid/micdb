@@ -1,0 +1,35 @@
+@import './modules/_variables.scss';
+
+.header {
+	@include make-row();
+}
+
+.header__inner {
+	@include make-lg-column(12);
+}
+
+.header__img {
+	margin-right: 15px;
+}
+
+.header__name {
+	display: inline-block;
+	font-size: 72px;
+	margin: 0;
+	vertical-align: middle;
+}
+
+.header__intro {
+	margin: 10px 0;
+	padding: 0;
+}
+
+.header__genre {
+	border: 1px solid $green; 
+	border-radius: 5px;
+	display: inline-block;
+	list-style: none;
+	margin: 0;
+	margin-right: 20px;
+	padding: 5px;
+}

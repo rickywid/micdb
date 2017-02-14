@@ -1,9 +1,8 @@
 @import '_bootstrap.scss';
-
-.left {
-        @include make-lg-column(2);
-}
-
-.right {
-	@include make-lg-column(8);
-}
+@import '/modules/_header.scss';
+@import '/modules/_albums.scss';
+@import '/modules/_form.scss';
+@import '/modules/_buttons.scss';
+@import '/modules/_intro.scss';
+@import '/modules/_top-tracks.scss';
+@import '/modules/_upcoming-events.scss';

@@ -1,0 +1,15 @@
+@import './modules/_variables.scss';
+
+.btn {
+	background-color: transparent;
+	border: 1px solid $green;
+	border-radius: 15px;
+	font-weight: bold;
+    padding: 5px 31px;
+	transition: .2s background-color;
+
+	&:hover {
+		background-color: $dark-green;
+		color: #fff;
+	}	
+}

@@ -1,0 +1,29 @@
+.top-tracks {
+	@include make-row();
+}
+
+.top-tracks__inner {
+	@include make-lg-column(12);
+	background: rgba(255,255,255,0.1);
+}
+
+.top-tracks__list {
+	padding: 0;
+}
+
+.top-tracks__list-item {
+	border-bottom: 1px solid rgba(255,255,255,0.1);
+	clear: both;
+	list-style: none;
+    padding: 8px;
+
+	.btn--load-more {
+		float: right;
+	}
+}
+
+.top-tracks__title {
+	display: inline-block;
+	font-size: 20px;
+	margin: 0;
+}

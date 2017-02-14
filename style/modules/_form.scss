@@ -1,0 +1,48 @@
+@import './modules/_variables.scss';
+
+.form {
+	//background: linear-gradient(45deg, rgba(255,184,241,1) 0%, rgba(51,215,201,1) 41%, rgba(166,255,122,1) 77%, rgba(255,245,140,1) 100%);
+	// background-image: url('/style/img/bg.jpeg');
+	// background-size: cover;
+	padding: 20px 0px;
+	// text-align: center;
+}
+
+.form__logo {
+	vertical-align: middle;
+}
+
+.form__form {
+	display: inline-block;
+	width: 50%;
+}
+
+.form__title {
+    display: inline-block;
+    //font-size: 70px;
+	margin: 0 20px;
+	margin-left: 0;
+    vertical-align: middle;
+}
+
+.form__follow-text {
+	margin: 37px 0;
+}
+
+.form__input {
+	background-color: transparent;
+	border: 1px solid $green;
+	border-radius: 100px;
+	//font-size: 36px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	text-align: center;
+	outline: none;	
+	padding: 5px;
+	width: 50%;
+}
+
+.form__button {
+	display: inline-block;
+	margin: 0 auto;
+}
