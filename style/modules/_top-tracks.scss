@@ -7,23 +7,24 @@
 	background: rgba(255,255,255,0.1);
 }
 
-.top-tracks__list {
-	padding: 0;
+.top-tracks__table {
+	width: 100%;
 }
 
-.top-tracks__list-item {
-	border-bottom: 1px solid rgba(255,255,255,0.1);
-	clear: both;
-	list-style: none;
+.top-tracks__td-head {
+	padding: 8px;
+}
+
+// .top-tracks__tr-tbody:nth-child(odd) {
+// 	background-color: rgba(255,255,255,0.5);
+// }
+
+.top-tracks__td {
+	border-top: 1px solid rgba(255,255,255,0.1);
     padding: 8px;
+    vertical-align: middle;
 
-	.btn--load-more {
-		float: right;
-	}
-}
-
-.top-tracks__title {
-	display: inline-block;
-	font-size: 20px;
-	margin: 0;
+    &:last-child {
+    	text-align: right;
+    }
 }

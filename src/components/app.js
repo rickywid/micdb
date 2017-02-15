@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import ReactPaginate from 'react-paginate';
 
 import Form from './form';
 import Header from './header';
@@ -22,7 +23,10 @@ export default class App extends React.Component {
 			artistTopTracks: [],
 			loadTrack: '',
 			defaultTrack: null,
-			genre: []
+			genre: [],
+			pageCount: 0,
+			perPage: 5,
+			offset: 0
 		};
 
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,8 +46,12 @@ export default class App extends React.Component {
 			this.setState({ artistImg: data.data.artists.items[0].images[0].url });
 			this.setState({ genre: data.data.artists.items[0].genres });
 
-			return axios.get(`https://api.spotify.com/v1/artists/${this.state.artistID}/albums?offset=0&limit=10`);
+			return axios.get(`https://api.spotify.com/v1/artists/${this.state.artistID}/albums`,
+				{params: {offset: 0}}
+			);
 		}).then((albums) => {
+			console.log(albums.data.items);
+			this.setState({ pageCount: albums.data.items.length / this.state.perPage });
 			this.setState({ artistAlbums: albums.data.items });
 
 			return axios.get(`https://api.spotify.com/v1/artists/${this.state.artistID}/top-tracks?country=US`);
@@ -53,6 +61,24 @@ export default class App extends React.Component {
 		});
 
 		this.setState({ artist: ''});
+	}
+
+	loadCommentsFromServer() {
+		axios.get(
+			`https://api.spotify.com/v1/artists/${this.state.artistID}/albums`,
+			{ params: { offset: this.state.offset}}
+		).then((album) => {
+			this.setState({artistAlbums: album.data.items})
+		})
+	}
+
+	handlePageClick(data) {
+	    let selected = data.selected;
+	    let offset = Math.ceil(selected * this.state.perPage);
+
+	    this.setState({offset: offset}, () => {
+	      this.loadCommentsFromServer();
+	    });
 	}
 
 	handleChange(e) {
@@ -70,20 +96,29 @@ export default class App extends React.Component {
 							<input type="text" className="form__input" value={this.state.artist} onChange={this.handleChange}/>
 							<input type="submit" value="search" className="btn btn--search form__button" />
 						</form>
-					</div>					
-				</div>			
+					</div>
+				</div>	
 				<div className="row">
 					<div className="main">
 						<Header name={this.state.artistName} img={this.state.artistImg} genre={this.state.genre} />
-						<Intro />
-						<Albums albums={this.state.artistAlbums} loadSong={this.loadSong}/>
-
 						<div className="main__playlist">
 							<TopTracks topTracks={this.state.artistTopTracks} loadSong={this.loadSong} />
 						</div>
 						<div className="main__playlist-widget">
 							<WidgetPlayer loadTrack={this.state.loadTrack} defaultTrack={this.state.defaultTrack}/>
 						</div>
+						<Albums albums={this.state.artistAlbums} loadSong={this.loadSong}/>
+				        <ReactPaginate previousLabel={'previous'}
+								nextLabel={'next'}
+								breakLabel={<a href=''>...</a>}
+								breakClassName={'break-me'}
+								pageCount={this.state.pageCount}
+								marginPagesDisplayed={2}
+								pageRangeDisplayed={5}
+								onPageChange={this.handlePageClick.bind(this)}
+								containerClassName={'pagination'}
+								subContainerClassName={'pages pagination'}
+								activeClassName={'active'} />					
 						<UpcomingEvents />
 					</div>
 				</div>

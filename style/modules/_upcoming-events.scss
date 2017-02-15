@@ -3,5 +3,35 @@
 }
 
 .upcoming-events__inner {
-	@include make-lg-column(12);
+	@include make-lg-column(8);
+}
+
+.upcoming-events__list {
+	padding: 0;
+}
+
+.upcoming-events__item {
+    border-bottom: 1px solid rgba(255,255,255,0.1);	
+    font-size: 20px;
+    height: 50px;
+    list-style: none;
+    padding-top: 10px;
+
+	.btn {
+		float: right;
+	}
+}
+
+.upcoming-events__item-cal,
+.upcoming-events__item-name {
+	display: inline-block;
+	float: left;
+}
+
+.upcoming-events__item-cal {
+	margin-right: 20px;
+}
+
+.upcoming-events__item-name {
+	margin: 0;
 }
