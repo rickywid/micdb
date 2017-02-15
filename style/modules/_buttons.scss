@@ -5,7 +5,7 @@
 	border: 1px solid $green;
 	border-radius: 15px;
 	color: #fff;
-	font-size: 14px;
+	//font-size: 14px;
 	font-weight: bold;
 	min-width: 129px;
     padding: 5px 31px;
@@ -14,5 +14,11 @@
 	&:hover {
 		background-color: $dark-green;
 		color: #fff;
-	}	
+		text-decoration: none;
+	}		
+}
+
+.btn--load-song {
+	font-size: 12px;
+	min-width: 145px;
 }

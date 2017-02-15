@@ -1,17 +1,9 @@
-.top-tracks {
-	@include make-row();
-}
-
-.top-tracks__inner {
-	@include make-lg-column(12);
-	background: rgba(255,255,255,0.1);
-}
-
 .top-tracks__table {
 	width: 100%;
 }
 
 .top-tracks__td-head {
+	background: rgba(255,255,255,0.1);
 	padding: 8px;
 }
 
@@ -27,4 +19,21 @@
     &:last-child {
     	text-align: right;
     }
+}
+
+.top-tracks__artist,
+.top-tracks__feat-artists {
+	margin: 0;
+}
+
+.top-tracks__feat-artists {
+	color: rgba(255,255,255,0.7);
+	font-size: .7em;
+}
+
+.top-tracks__album {
+	&:hover {
+		//border-bottom: 2px solid white;
+		cursor: pointer;
+	}
 }

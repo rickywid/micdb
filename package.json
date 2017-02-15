@@ -44,6 +44,7 @@
     "autoprefixer": "^6.7.2",
     "babel-preset-stage-1": "^6.1.18",
     "lodash": "^3.10.1",
+    "moment": "^2.17.1",
     "react": "^0.14.3",
     "react-addons-create-fragment": "^15.4.2",
     "react-dom": "^0.14.3",

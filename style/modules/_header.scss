@@ -1,11 +1,8 @@
 @import './modules/_variables.scss';
 
 .header {
-	@include make-row();
-}
-
-.header__inner {
 	@include make-lg-column(12);
+	margin-bottom: 20px;
 }
 
 .header__img {
@@ -15,7 +12,7 @@
 
 .header__name {
 	display: inline-block;
-	font-size: 72px;
+	//font-size: 72px;
 	margin: 0;
 	vertical-align: middle;
 }

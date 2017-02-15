@@ -73,13 +73,3 @@ body{
 .main__playlist-widget {
 	@include make-lg-column(4);
 }
-
-.pagination {
-	list-style: none;
-
-	li {
-		display: inline-block;
-		list-style: none;
-		margin-right: 10px;
-	}
-}

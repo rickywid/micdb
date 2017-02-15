@@ -11,7 +11,12 @@
 }
 
 .albums__img {
-	height: 180px;
+	height: 170px;
+	margin-top: 20px;
+
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 .albums__list {
