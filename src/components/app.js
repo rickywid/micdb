@@ -9,6 +9,7 @@ import Albums from './albums';
 import TopTracks from './top-tracks';
 import WidgetPlayer from './widget-player';
 import UpcomingEvents from './upcoming-events';
+import ConcertTracks from './concert-tracks';
 
 export default class App extends React.Component {
 	constructor(props) {
@@ -28,7 +29,8 @@ export default class App extends React.Component {
 			pageCount: 0,
 			perPage: 5,
 			offset: 0,
-			displayDefaultView: true
+			displayDefaultView: true,
+			concertsTracks: []
 		};
 
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,6 +42,7 @@ export default class App extends React.Component {
 		let concerts = [];
 		let artistId = [];
 		let id = [];
+		let id2 = [];
 
 		axios.get(`https://api.seatgeek.com/2/events?q=concert&client_id=Njg1MjcxMXwxNDg3MTU4MjQ4LjA&geoip=true`).then((data) => {
 			data.data.events.map( event => {
@@ -55,16 +58,23 @@ export default class App extends React.Component {
 
 			arr.map(artist => {
 				axios.get(`https://api.spotify.com/v1/search?q=${artist}&type=artist`).then((data) => {
-					if (data.data.artists.items.length) {
-						id.push(data.data.artists.items[0].id);
-					}
-					
+					id.push(data);
+
 					id.map(artistid => {
-									//https://api.spotify.com/v1/artists/2w0Dmj9GV9ZrokNRcnRwav/top-tracks?country=US
-						axios.get(`https://api.spotify.com/v1/artists/${artistid}/top-tracks?country=US`).then(data => {
-							console.log(data);
-						});
+						if(artistid.data.artists.items[0]) {
+							let artist = artistid.data.artists.items[0].id;
+
+							//console.log(artistid.data.artists.items[0].id)
+
+							axios.get(`https://api.spotify.com/v1/artists/${artist}/top-tracks?country=US`).then(data => {
+								//console.log(data)
+								id2.push(data);
+								this.setState({ concertTracks: id2 });
+							});							
+						}
+
 					});
+					//console.log(id2);
 				});
 			});
 		});
@@ -130,7 +140,7 @@ export default class App extends React.Component {
 
 	render() {
 		const hide = this.state.displayDefaultView ? '' : ' hide';
-
+		//console.log(this.state.concertTracks);
 		return (
 			<div>
 				<div className="row">
@@ -147,7 +157,7 @@ export default class App extends React.Component {
 				</div>	
 				<div className="row">
 					<div className={`col-lg-12 ${hide}`}>
-						<h3>Concerts near you</h3>
+						<ConcertTracks concertTracks={this.state.concertTracks} loadSong={this.loadSong} loadTrack={this.state.loadTrack} />
 					</div>
 				</div>
 				<div className="row">
