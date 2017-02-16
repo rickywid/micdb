@@ -24,18 +24,19 @@ export default class App extends React.Component {
 			artistTopTracks: [],
 			artistEvents: [],
 			loadTrack: '',
-			defaultTrack: null,
+			defaultTrack: '',
 			genre: [],
 			pageCount: 0,
 			perPage: 5,
 			offset: 0,
 			displayDefaultView: true,
-			concertsTracks: []
+			concertTrack: []
 		};
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.loadSong = this.loadSong.bind(this);
+		this.updateUpcomingEvents = this.updateUpcomingEvents.bind(this);
 	}
 
 	componentDidMount() {
@@ -44,6 +45,7 @@ export default class App extends React.Component {
 		let id = [];
 		let id2 = [];
 
+		// get concert event near user
 		axios.get(`https://api.seatgeek.com/2/events?q=concert&client_id=Njg1MjcxMXwxNDg3MTU4MjQ4LjA&geoip=true`).then((data) => {
 			data.data.events.map( event => {
 				if (event.type === 'concert') {
@@ -56,28 +58,30 @@ export default class App extends React.Component {
 			let arr = concerts.join(' ').replace(/-/g, '%20');
 			arr = arr.split(' ');
 
+			// get artist id
 			arr.map(artist => {
+				let x;
+
 				axios.get(`https://api.spotify.com/v1/search?q=${artist}&type=artist`).then((data) => {
-					id.push(data);
+					if(data.data.artists.items[0]) {
+						x = data.data.artists.items[0].id;
+					}
 
-					id.map(artistid => {
-						if(artistid.data.artists.items[0]) {
-							let artist = artistid.data.artists.items[0].id;
-
-							//console.log(artistid.data.artists.items[0].id)
-
-							axios.get(`https://api.spotify.com/v1/artists/${artist}/top-tracks?country=US`).then(data => {
-								//console.log(data)
-								id2.push(data);
-								this.setState({ concertTracks: id2 });
-							});							
-						}
-
-					});
-					//console.log(id2);
+					return axios.get(`https://api.spotify.com/v1/artists/${x}/top-tracks?country=US`);	
+				}).then(data => {
+					id2.push(data);
+					this.setState({ concertTrack: id2 });
 				});
 			});
 		});
+	}
+
+	updateUpcomingEvents(artist) {
+		console.log('artist');
+		// axios.get(`https://api.seatgeek.com/2/events?performers.slug=${artist}&client_id=Njg1MjcxMXwxNDg3MTU4MjQ4LjA`).then(data => {
+		// 		console.log(data);
+		// 	//this.setState({ artistEvents: data });
+		// })
 	}
 
 	loadSong(uri) {
@@ -140,7 +144,7 @@ export default class App extends React.Component {
 
 	render() {
 		const hide = this.state.displayDefaultView ? '' : ' hide';
-		//console.log(this.state.concertTracks);
+		
 		return (
 			<div>
 				<div className="row">
@@ -150,14 +154,19 @@ export default class App extends React.Component {
 							<h1 className="form__title"> Mic'dDB</h1>
 						</a>
 						<form action="" className="form__form" onSubmit={this.handleSubmit}>
-							<input type="text" className="form__input" value={this.state.artist} onChange={this.handleChange}/>
+							<input type="text" className="form__input" value={this.state.artist} placeholder="search artist..." onChange={this.handleChange}/>
 							<input type="submit" value="search" className="btn btn--search form__button" />
 						</form>
 					</div>
 				</div>	
 				<div className="row">
-					<div className={`col-lg-12 ${hide}`}>
-						<ConcertTracks concertTracks={this.state.concertTracks} loadSong={this.loadSong} loadTrack={this.state.loadTrack} />
+					<div className={`col-lg-10 col-lg-offset-1 ${hide}`}>
+						<ConcertTracks 
+							concertTrack={this.state.concertTrack} 
+							loadSong={this.loadSong} 
+							loadTrack={this.state.loadTrack} 
+							events={this.updateUpcomingEvents}
+						/>
 					</div>
 				</div>
 				<div className="row">
