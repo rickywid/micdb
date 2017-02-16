@@ -4,7 +4,6 @@ import moment from 'moment';
 export default class UpComingEvents extends React.Component {
 	
 	renderEvents(event) {
-		console.log(event);
 		return (
 			<li className="upcoming-events__item">
 				<div className="upcoming-events__item-cal">{moment(event.datetime_local).format('MMM D')}</div>

@@ -11,7 +11,6 @@ export default class ConcertTracks extends React.Component {
 	}
 
 	expandList() {
-		console.log('called')
 		this.setState({ expandListOpen: !this.state.expandListOpen })
 	}
 
@@ -52,7 +51,7 @@ export default class ConcertTracks extends React.Component {
 					{concertTrack.map(this.renderTracks.bind(this))}
 				</div>
 				<div className="col-lg-6">
-					<iframe src={`https://embed.spotify.com/?uri=spotify:artist:2w0Dmj9GV9ZrokNRcnRwav`} width="300" height="380" frameBorder="0" allowTransparency="true"></iframe>
+					<iframe src={`https://embed.spotify.com/?uri=${loadTrack ? loadTrack : "spotify:artist:2w0Dmj9GV9ZrokNRcnRwav"}`} width="300" height="380" frameBorder="0" allowTransparency="true"></iframe>
 				</div>
 			</div>
 		)
