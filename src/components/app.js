@@ -143,7 +143,13 @@ export default class App extends React.Component {
 	}
 
 	render() {
-		const hide = this.state.displayDefaultView ? '' : ' hide';
+		const showConcert = this.state.displayDefaultView ?  						
+						<ConcertTracks 
+							concertTrack={this.state.concertTrack} 
+							loadSong={this.loadSong} 
+							loadTrack={this.state.loadTrack} 
+							events={this.updateUpcomingEvents}
+						/> : null;
 		
 		return (
 			<div>
@@ -160,13 +166,8 @@ export default class App extends React.Component {
 					</div>
 				</div>	
 				<div className="row">
-					<div className={`col-lg-10 col-lg-offset-1 ${hide}`}>
-						<ConcertTracks 
-							concertTrack={this.state.concertTrack} 
-							loadSong={this.loadSong} 
-							loadTrack={this.state.loadTrack} 
-							events={this.updateUpcomingEvents}
-						/>
+					<div className={`col-lg-10 col-lg-offset-1`}>
+						{showConcert}
 					</div>
 				</div>
 				<div className="row">
