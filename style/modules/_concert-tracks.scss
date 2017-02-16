@@ -32,15 +32,14 @@
 }
 
 .concert-track__list-tracks {
-	height: 0;
 	list-style: none;
 	max-height: 0;
 	overflow: hidden;
+	padding: 0;
 	transition: 0.5s max-height;
 }
 
 .concert-track__list-tracks--open {
-	height: 100%;
 	max-height: 1000px;
 	padding: 0;
 	transition: 0.5s max-height;
