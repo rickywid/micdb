@@ -165,7 +165,7 @@ export default class App extends React.Component {
 			<div>
 				<div className="row">
 					<div className="col-lg-12 form">
-						<a className="logo" href="/">
+						<a className="logo" href="/micdb">
 							<i className="fa fa-microphone fa-lg form__logo" aria-hidden="true"></i>
 							<h1 className="form__title"> Mic'dDB</h1>
 						</a>
