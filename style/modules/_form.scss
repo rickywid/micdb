@@ -14,7 +14,7 @@
 
 .form__form {
 	display: inline-block;
-	width: 50%;
+	width: 88%;
 }
 
 .form__title {
@@ -44,4 +44,9 @@
 .form__button {
 	display: inline-block;
 	margin: 0 auto;
+}
+
+.form__no-results {
+	display: inline-block;
+	margin-left: 20px;
 }

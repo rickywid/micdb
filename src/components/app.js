@@ -30,7 +30,8 @@ export default class App extends React.Component {
 			perPage: 5,
 			offset: 0,
 			displayDefaultView: true,
-			concertTrack: []
+			concertTrack: [],
+			noResults: false
 		};
 
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -93,7 +94,14 @@ export default class App extends React.Component {
 		this.setState({ displayDefaultView: false });
 
 		axios.get(`https://api.spotify.com/v1/search?q=${this.state.artist}&type=artist`).then((data) => {
-			this.setState({ artistID: data.data.artists.items[0].id });
+			if (data.data.artists.items.length) {
+				this.setState({ artistID: data.data.artists.items[0].id });	
+				this.setState({ noResults: false });
+			} else {
+				this.setState({})
+				this.setState({ noResults: true})
+			}
+			
 			this.setState({ artistName: data.data.artists.items[0].name });
 			this.setState({ artistImg: data.data.artists.items[0].images[0].url });
 			this.setState({ genre: data.data.artists.items[0].genres });
@@ -150,6 +158,8 @@ export default class App extends React.Component {
 							loadTrack={this.state.loadTrack} 
 							events={this.updateUpcomingEvents}
 						/> : null;
+
+		const displayNoResults = this.state.noResults ? <p className="form__no-results">No artist found</p> : '';
 		
 		return (
 			<div>
@@ -162,12 +172,14 @@ export default class App extends React.Component {
 						<form action="" className="form__form" onSubmit={this.handleSubmit}>
 							<input type="text" className="form__input" value={this.state.artist} placeholder="search artist..." onChange={this.handleChange}/>
 							<input type="submit" value="search" className="btn btn--search form__button" />
+							{displayNoResults}
 						</form>
 					</div>
 				</div>	
 				<div className="row">
 					<div className={`col-lg-10 col-lg-offset-1`}>
 						{showConcert}
+						
 					</div>
 				</div>
 				<div className="row">
