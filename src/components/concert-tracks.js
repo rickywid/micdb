@@ -22,7 +22,7 @@ export default class ConcertTracks extends React.Component {
 			return (
 				<li className="concert-track__item-inner">
 					<p className="concert-track__track">{artistTrack.name}</p>
-					<button className="concert-track__btn btn btn--concert" onClick={this.props.loadSong.bind(this, artistTrack.uri)}>load track</button>
+					<button className="concert-track__btn btn btn--concert" onClick={this.props.loadSong.bind(this, artistTrack.uri)}>listen</button>
 				</li>
 			);
 		})

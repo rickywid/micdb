@@ -26,7 +26,7 @@ class TopTracks extends React.Component {
                 	<p className="top-tracks__feat-artists">{track.artists.length > 1 ?  featArtists : '' }</p>
                 </td>
                 <td className="top-tracks__td"><span className="top-tracks__album" onClick={this.props.loadSong.bind(this, track.album.uri)}>{track.album.name}</span></td>
-                <td className="top-tracks__td"><button className="btn btn--load-song" onClick={this.props.loadSong.bind(this, track.uri)}>load track</button></td>
+                <td className="top-tracks__td"><button className="btn btn--load-song" onClick={this.props.loadSong.bind(this, track.uri)}>listen</button></td>
             </tr>
 		);
 	}
