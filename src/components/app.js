@@ -37,7 +37,8 @@ export default class App extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.loadSong = this.loadSong.bind(this);
-		this.updateUpcomingEvents = this.updateUpcomingEvents.bind(this);
+		this.getArtistInfo = this.getArtistInfo.bind(this);
+		this.handleClickSubmit = this.handleClickSubmit.bind(this);
 	}
 
 	componentDidMount() {
@@ -47,13 +48,9 @@ export default class App extends React.Component {
 		let id2 = [];
 
 		// get concert event near user
-		axios.get(`https://api.seatgeek.com/2/events?q=concert&client_id=Njg1MjcxMXwxNDg3MTU4MjQ4LjA&geoip=true`).then((data) => {
+		axios.get(`https://api.seatgeek.com/2/events?taxonomies.name=concert&client_id=Njg1MjcxMXwxNDg3MTU4MjQ4LjA&geoip=true`).then((data) => {
 			data.data.events.map( event => {
-				if (event.type === 'concert') {
-					event.performers.map((performer) => {
-						concerts.push(performer.slug);
-					});
-				}
+				concerts.push(event.performers[0].slug);
 			});
 
 			let arr = concerts.join(' ').replace(/-/g, '%20');
@@ -67,7 +64,8 @@ export default class App extends React.Component {
 					if(data.data.artists.items[0]) {
 						x = data.data.artists.items[0].id;
 					}
-
+					
+					// get artist top tracks
 					return axios.get(`https://api.spotify.com/v1/artists/${x}/top-tracks?country=US`);	
 				}).then(data => {
 					id2.push(data);
@@ -77,14 +75,6 @@ export default class App extends React.Component {
 		});
 	}
 
-	updateUpcomingEvents(artist) {
-		console.log('artist');
-		// axios.get(`https://api.seatgeek.com/2/events?performers.slug=${artist}&client_id=Njg1MjcxMXwxNDg3MTU4MjQ4LjA`).then(data => {
-		// 		console.log(data);
-		// 	//this.setState({ artistEvents: data });
-		// })
-	}
-
 	loadSong(uri) {
 		this.setState({ loadTrack: uri });
 	}
@@ -92,18 +82,30 @@ export default class App extends React.Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		this.setState({ displayDefaultView: false });
+		this.getArtistInfo(this.state.artist);
+	}
 
-		axios.get(`https://api.spotify.com/v1/search?q=${this.state.artist}&type=artist`).then((data) => {
+	handleClickSubmit(artist) {
+		this.getArtistInfo(artist);
+		this.setState({ displayDefaultView: false });
+	}
+
+	getArtistInfo(artist) {
+		
+		axios.get(`https://api.spotify.com/v1/search?q=${artist}&type=artist`).then((data) => {
 			if (data.data.artists.items.length) {
-				this.setState({ artistID: data.data.artists.items[0].id });	
+				this.setState({ artistID: data.data.artists.items[0].id });
 				this.setState({ noResults: false });
 			} else {
-				this.setState({})
-				this.setState({ noResults: true})
+				this.setState({});
+				this.setState({ noResults: true });
+			} 
+
+			if (data.data.artists.items[0].images.length) {
+				this.setState({ artistImg: data.data.artists.items[0].images[0].url });
 			}
-			
+
 			this.setState({ artistName: data.data.artists.items[0].name });
-			this.setState({ artistImg: data.data.artists.items[0].images[0].url });
 			this.setState({ genre: data.data.artists.items[0].genres });
 
 			return axios.get(`https://api.spotify.com/v1/artists/${this.state.artistID}/albums`,
@@ -118,14 +120,14 @@ export default class App extends React.Component {
 			this.setState({ artistTopTracks: tracks });
 			this.setState({ defaultTrack: tracks.data.tracks[0].uri });
 
-			const str = this.state.artist.replace(/ /g, '-');
-		
-			return axios.get(`https://api.seatgeek.com/2/events?performers.slug=${str}&client_id=Njg1MjcxMXwxNDg3MTU4MjQ4LjA`);
+			const slug = artist.replace(/[^0-9A-Za-z]+/g,'-').replace(/\+$/,'').toLowerCase();
+			console.log(slug);
+			return axios.get(`https://api.seatgeek.com/2/events?performers.slug=${slug}&client_id=Njg1MjcxMXwxNDg3MTU4MjQ4LjA`);
 		})
 		.then((performer) => {
 			this.setState({ artistEvents: performer.data.events });
 			this.setState({ artist: '' });
-		});
+		});		
 	}
 
 	loadCommentsFromServer() {
@@ -156,7 +158,7 @@ export default class App extends React.Component {
 							concertTrack={this.state.concertTrack} 
 							loadSong={this.loadSong} 
 							loadTrack={this.state.loadTrack} 
-							events={this.updateUpcomingEvents}
+							handleClickSubmit={ this.handleClickSubmit }
 						/> : null;
 
 		const displayNoResults = this.state.noResults ? <p className="form__no-results">No artist found</p> : '';
