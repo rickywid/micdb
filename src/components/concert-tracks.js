@@ -21,7 +21,7 @@ export default class ConcertTracks extends React.Component {
 		*/
 
 		const artist = track.data.tracks[0].artists[0].name;
-		const open = this.state.expandListOpen ? 'open' : '';
+		//const open = this.state.expandListOpen ? 'open' : '';
 
 		const x = track.data.tracks.map((artistTrack) => {
 			return (

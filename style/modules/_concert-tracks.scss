@@ -11,6 +11,8 @@
 	padding-bottom: 10px;
 
 	&:hover {
+		border-right: 5px solid $green;
+		color: $green;
 		cursor: pointer;
 	}
 }
@@ -19,6 +21,7 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	text-align: left;
 }
 
 .concert-track__track {
