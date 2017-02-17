@@ -45,15 +45,15 @@ export default class ConcertTracks extends React.Component {
 	}
 
 	render() {
-		const { concertTrack, loadSong, loadTrack, events } = this.props;
-
-		console.log(events);
+		const { concertTrack, loadSong, loadTrack, events, location } = this.props;
 
 		if (!concertTrack) return null;
 
+		const userLocation = location ? location.city : ''; 
+
 		return (
 			<div className="concert-track">
-				<h1 className="concert-track__header">concerts near you...</h1>
+				<h1 className="concert-track__header">upcoming concerts around <span className="concert-track__user-location">{userLocation}</span></h1>
 				<div className="col-lg-6">
 					{concertTrack.map(this.renderTracks)}
 				</div>

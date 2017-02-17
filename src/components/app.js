@@ -29,7 +29,8 @@ export default class App extends React.Component {
 			offset: 0,
 			displayDefaultView: true,
 			concertTrack: [],
-			noResults: false
+			noResults: false,
+			userLocation: {}
 		};
 
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,6 +48,7 @@ export default class App extends React.Component {
 
 		// get concert event near user
 		axios.get('https://api.seatgeek.com/2/events?taxonomies.name=concert&client_id=Njg1MjcxMXwxNDg3MTU4MjQ4LjA&geoip=true').then((data) => {
+			this.setState({ location: data.data.meta.geolocation });
 			data.data.events.map( event => {
 				concerts.push(event.performers[0].slug);
 			});
@@ -153,11 +155,12 @@ export default class App extends React.Component {
 	render() {
 		const showConcert = this.state.displayDefaultView ?				
 						<ConcertTracks 
-							concertTrack={this.state.concertTrack}
-							loadSong={this.loadSong}
-							loadTrack={this.state.loadTrack}
-							handleClickSubmit={ this.handleClickSubmit }
-							events={this.state.artistEvents}
+							concertTrack = {this.state.concertTrack}
+							loadSong = {this.loadSong}
+							loadTrack = {this.state.loadTrack}
+							handleClickSubmit = { this.handleClickSubmit }
+							events = {this.state.artistEvents}
+							location = {this.state.location}
 						/> : null;
 
 		const displayNoResults = this.state.noResults ? <p className="form__no-results">No artist found</p> : '';

@@ -3,6 +3,7 @@
 }
 
 .concert-track__header {
+	font-size: 1.5em;
 	margin-bottom: 56px;
 }
 
@@ -46,4 +47,8 @@
 	max-height: 1000px;
 	padding: 0;
 	transition: 0.5s max-height;
+}
+
+.concert-track__user-location {
+	color: $green;
 }
