@@ -121,11 +121,12 @@ export default class App extends React.Component {
 			this.setState({ defaultTrack: tracks.data.tracks[0].uri });
 
 			const slug = artist.replace(/[^0-9A-Za-z]+/g,'-').replace(/\+$/,'').toLowerCase();
-			console.log(slug);
+			
 			return axios.get(`https://api.seatgeek.com/2/events?performers.slug=${slug}&client_id=Njg1MjcxMXwxNDg3MTU4MjQ4LjA`);
 		})
 		.then((performer) => {
 			this.setState({ artistEvents: performer.data.events });
+			console.log(this.state.artistEvents);
 			this.setState({ artist: '' });
 		});		
 	}
@@ -159,6 +160,7 @@ export default class App extends React.Component {
 							loadSong={this.loadSong} 
 							loadTrack={this.state.loadTrack} 
 							handleClickSubmit={ this.handleClickSubmit }
+							events={this.state.artistEvents}
 						/> : null;
 
 		const displayNoResults = this.state.noResults ? <p className="form__no-results">No artist found</p> : '';

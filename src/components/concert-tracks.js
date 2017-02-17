@@ -45,7 +45,9 @@ export default class ConcertTracks extends React.Component {
 	}
 
 	render() {
-		const { concertTrack, loadSong, loadTrack } = this.props;
+		const { concertTrack, loadSong, loadTrack, events } = this.props;
+
+		console.log(events);
 
 		if (!concertTrack) return null;
 
