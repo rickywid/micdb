@@ -11,10 +11,9 @@
 }
 
 .upcoming-events__item {
-    border-bottom: 1px solid rgba(255,255,255,0.1);	
-    //font-size: 20px;
-    list-style: none;
-    padding-top: 10px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	list-style: none;
+	padding-top: 10px;
 
 	.btn {
 		float: right;
@@ -50,6 +49,6 @@
 
 .upcoming-events__item-address {
 	clear: left;
-	color: rgba(255,255,255,0.7);
-	font-size: .7em;	
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 0.7em;
 }

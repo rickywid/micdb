@@ -8,18 +8,17 @@
 	font-size: 12px;
 	font-weight: bold;
 	min-width: 129px;
-    padding: 5px 31px;
-	transition: .2s background-color;
+	padding: 5px 31px;
+	transition: 0.2s background-color;
 
 	&:hover {
 		background-color: $dark-green;
 		color: #fff;
 		text-decoration: none;
-	}		
+	}
 }
 
 .btn--load-song {
-	//font-size: 12px;
 	min-width: 145px;
 }
 

@@ -1,11 +1,7 @@
 @import './modules/_variables.scss';
 
 .form {
-	//background: linear-gradient(45deg, rgba(255,184,241,1) 0%, rgba(51,215,201,1) 41%, rgba(166,255,122,1) 77%, rgba(255,245,140,1) 100%);
-	// background-image: url('/style/img/bg.jpeg');
-	// background-size: cover;
-	padding: 20px 0px;
-	// text-align: center;
+	padding: 20px 0;
 }
 
 .form__logo {
@@ -18,11 +14,11 @@
 }
 
 .form__title {
-    display: inline-block;
-    font-size: 20px;
+	display: inline-block;
+	font-size: 20px;
 	margin: 0 20px;
 	margin-left: 0;
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 .form__follow-text {
@@ -36,7 +32,7 @@
 	//font-size: 36px;
 	margin-bottom: 20px;
 	margin-right: 20px;
-	outline: none;	
+	outline: none;
 	padding: 5px 30px;
 	width: 50%;
 }

@@ -2,9 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 
-import Form from './form';
 import Header from './header';
-import Intro from './intro';
 import Albums from './albums';
 import TopTracks from './top-tracks';
 import WidgetPlayer from './widget-player';
@@ -48,7 +46,7 @@ export default class App extends React.Component {
 		let id2 = [];
 
 		// get concert event near user
-		axios.get(`https://api.seatgeek.com/2/events?taxonomies.name=concert&client_id=Njg1MjcxMXwxNDg3MTU4MjQ4LjA&geoip=true`).then((data) => {
+		axios.get('https://api.seatgeek.com/2/events?taxonomies.name=concert&client_id=Njg1MjcxMXwxNDg3MTU4MjQ4LjA&geoip=true').then((data) => {
 			data.data.events.map( event => {
 				concerts.push(event.performers[0].slug);
 			});
@@ -61,12 +59,12 @@ export default class App extends React.Component {
 				let x;
 
 				axios.get(`https://api.spotify.com/v1/search?q=${artist}&type=artist`).then((data) => {
-					if(data.data.artists.items[0]) {
+					if (data.data.artists.items[0]) {
 						x = data.data.artists.items[0].id;
 					}
-					
+
 					// get artist top tracks
-					return axios.get(`https://api.spotify.com/v1/artists/${x}/top-tracks?country=US`);	
+					return axios.get(`https://api.spotify.com/v1/artists/${x}/top-tracks?country=US`);
 				}).then(data => {
 					id2.push(data);
 					this.setState({ concertTrack: id2 });
@@ -91,7 +89,7 @@ export default class App extends React.Component {
 	}
 
 	getArtistInfo(artist) {
-		
+
 		axios.get(`https://api.spotify.com/v1/search?q=${artist}&type=artist`).then((data) => {
 			if (data.data.artists.items.length) {
 				this.setState({ artistID: data.data.artists.items[0].id });
@@ -99,7 +97,7 @@ export default class App extends React.Component {
 			} else {
 				this.setState({});
 				this.setState({ noResults: true });
-			} 
+			}
 
 			if (data.data.artists.items[0].images.length) {
 				this.setState({ artistImg: data.data.artists.items[0].images[0].url });
@@ -120,15 +118,14 @@ export default class App extends React.Component {
 			this.setState({ artistTopTracks: tracks });
 			this.setState({ defaultTrack: tracks.data.tracks[0].uri });
 
-			const slug = artist.replace(/[^0-9A-Za-z]+/g,'-').replace(/\+$/,'').toLowerCase();
-			
+			const slug = artist.replace(/[^0-9A-Za-z]+/g, '-').replace(/\+$/, '').toLowerCase();
+
 			return axios.get(`https://api.seatgeek.com/2/events?performers.slug=${slug}&client_id=Njg1MjcxMXwxNDg3MTU4MjQ4LjA`);
 		})
 		.then((performer) => {
 			this.setState({ artistEvents: performer.data.events });
-			console.log(this.state.artistEvents);
 			this.setState({ artist: '' });
-		});		
+		});
 	}
 
 	loadCommentsFromServer() {
@@ -154,36 +151,35 @@ export default class App extends React.Component {
 	}
 
 	render() {
-		const showConcert = this.state.displayDefaultView ?  						
+		const showConcert = this.state.displayDefaultView ?				
 						<ConcertTracks 
-							concertTrack={this.state.concertTrack} 
-							loadSong={this.loadSong} 
-							loadTrack={this.state.loadTrack} 
+							concertTrack={this.state.concertTrack}
+							loadSong={this.loadSong}
+							loadTrack={this.state.loadTrack}
 							handleClickSubmit={ this.handleClickSubmit }
 							events={this.state.artistEvents}
 						/> : null;
 
 		const displayNoResults = this.state.noResults ? <p className="form__no-results">No artist found</p> : '';
-		
+
 		return (
 			<div>
 				<div className="row">
 					<div className="col-lg-12 form">
 						<a className="logo" href="/micdb">
-							<i className="fa fa-microphone fa-lg form__logo" aria-hidden="true"></i>
+							<i className="fa fa-microphone fa-lg form__logo" aria-hidden="true" />
 							<h1 className="form__title"> Mic'dDB</h1>
 						</a>
 						<form action="" className="form__form" onSubmit={this.handleSubmit}>
-							<input type="text" className="form__input" value={this.state.artist} placeholder="search artist..." onChange={this.handleChange}/>
+							<input type="text" className="form__input" value={this.state.artist} placeholder="search artist..." onChange={this.handleChange} />
 							<input type="submit" value="search" className="btn btn--search form__button" />
 							{displayNoResults}
 						</form>
 					</div>
-				</div>	
+				</div>
 				<div className="row">
-					<div className={`col-lg-10 col-lg-offset-1`}>
+					<div className="col-lg-10 col-lg-offset-1">
 						{showConcert}
-						
 					</div>
 				</div>
 				<div className="row">

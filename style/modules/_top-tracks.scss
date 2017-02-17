@@ -3,7 +3,7 @@
 }
 
 .top-tracks__td-head {
-	background: rgba(255,255,255,0.1);
+	background: rgba(255, 255, 255, 0.1);
 	padding: 8px;
 }
 
@@ -12,13 +12,13 @@
 // }
 
 .top-tracks__td {
-	border-top: 1px solid rgba(255,255,255,0.1);
-    padding: 8px;
-    vertical-align: middle;
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	padding: 8px;
+	vertical-align: middle;
 
-    &:last-child {
-    	text-align: right;
-    }
+	&:last-child {
+		text-align: right;
+	}
 }
 
 .top-tracks__artist,
@@ -27,8 +27,8 @@
 }
 
 .top-tracks__feat-artists {
-	color: rgba(255,255,255,0.7);
-	font-size: .7em;
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 0.7em;
 }
 
 .top-tracks__album {
