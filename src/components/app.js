@@ -8,6 +8,7 @@ import TopTracks from './top-tracks';
 import WidgetPlayer from './widget-player';
 import UpcomingEvents from './upcoming-events';
 import ConcertTracks from './concert-tracks';
+import { StickyContainer, Sticky } from 'react-sticky';
 
 export default class App extends React.Component {
 	constructor(props) {
@@ -166,7 +167,8 @@ export default class App extends React.Component {
 		const displayNoResults = this.state.noResults ? <p className="form__no-results">No artist found</p> : '';
 
 		return (
-			<div>
+			
+			<StickyContainer>
 				<div className="row">
 					<div className="col-lg-12 form">
 						<a className="logo" href="/micdb">
@@ -195,7 +197,7 @@ export default class App extends React.Component {
 								<TopTracks topTracks={this.state.artistTopTracks} loadSong={this.loadSong} />
 							</div>
 							<div className="main__playlist-widget">
-								<WidgetPlayer loadTrack={this.state.loadTrack} defaultTrack={this.state.defaultTrack} />
+									<WidgetPlayer loadTrack={this.state.loadTrack} defaultTrack={this.state.defaultTrack} />
 							</div>
 							<Albums albums={this.state.artistAlbums} loadSong={this.loadSong} />
 							<div className="col-lg-8">
@@ -219,8 +221,7 @@ export default class App extends React.Component {
 						</div>
 					</div>
 				</div>
-
-			</div>
+			</StickyContainer>
 		);
 	}
 }

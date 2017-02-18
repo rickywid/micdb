@@ -78,6 +78,7 @@ body {
 
 .main__playlist {
 	@include make-lg-column(8);
+	padding-top: 20px;
 }
 
 .main__playlist-widget {

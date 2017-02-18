@@ -2,8 +2,6 @@
 
 .header {
 	@include make-lg-column(12);
-
-	margin-bottom: 20px;
 }
 
 .header__img {
