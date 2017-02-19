@@ -49,7 +49,7 @@ export default class ConcertTracks extends React.Component {
 
 		if (!concertTrack) return null;
 
-		const userLocation = location ? location.city : ''; 
+		const userLocation = location ? location.city : '';
 
 		return (
 			<div className="concert-track">
@@ -57,8 +57,23 @@ export default class ConcertTracks extends React.Component {
 				<div className="col-lg-6">
 					{concertTrack.map(this.renderTracks)}
 				</div>
-				<div className="col-lg-6">
-					<iframe src={`https://embed.spotify.com/?uri=${loadTrack ? loadTrack : 'spotify:artist:2w0Dmj9GV9ZrokNRcnRwav'}`} width="300" height="380" frameBorder="0" allowTransparency="true"></iframe>
+				<div className="col-lg-6 concert-track__features">
+					<div className="concert-track__features-item">
+							<h2 className="concert-track__features-header-title"><i className="fa fa-music fa-lg concert-track__features-header-title--browse" aria-hidden="true" />Browse</h2>
+							<p className="concert-track__features-header-description">Listen to your favourite song or album</p>
+					</div>
+					<div className="concert-track__features-item">
+							<h2 className="concert-track__features-header-title"><i className="fa fa-search fa-lg concert-track__features-header-title--search" aria-hidden="true" />Search</h2>
+							<p className="concert-track__features-header-description">search for your favourite artist</p>
+					</div>
+					<div className="concert-track__features-item">
+							<h2 className="concert-track__features-header-title"><i className="fa fa-calendar fa-lg concert-track__features-header-title--concerts" aria-hidden="true" />Concerts</h2>
+							<p className="concert-track__features-header-description">Get upcoming concert date information</p>
+					</div>
+					<div className="concert-track__features-item">
+							<h2 className="concert-track__features-header-title"><i className="fa fa-ticket fa-lg concert-track__features-header-title--tickets" aria-hidden="true" />Tickets</h2>
+							<p className="concert-track__features-header-description">Purchase tickets for upcoming events for your favourite artist</p>
+					</div>
 				</div>
 			</div>
 		);

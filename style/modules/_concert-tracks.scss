@@ -52,3 +52,44 @@
 .concert-track__user-location {
 	color: $green;
 }
+
+.concert-track__features-item {
+	margin-bottom: 36px;
+	text-align: left;
+}
+
+.concert-track__features-header-title {
+	color: $green;
+	margin: 0;
+	
+	.fa {
+		border-radius: 100%;
+		color: #fff;
+		float: left;
+		font-size: 39px;
+		height: 65px;
+		line-height: 64px;
+		margin-right: 20px;
+		width: 65px;
+	}
+}
+
+.concert-track__features-header-title--browse {
+	background-color: #64B5F5;
+	padding-left: 13px;
+}
+
+.concert-track__features-header-title--search {
+	background-color: #7E57C2;
+	padding-left: 15px;
+}
+
+.concert-track__features-header-title--concerts {
+	background-color: #FFCA28;
+	padding-left: 15px;
+}	
+
+.concert-track__features-header-title--tickets {
+	background-color: #EF5350;
+	padding-left: 13px;
+}		
