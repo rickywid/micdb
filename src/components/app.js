@@ -173,7 +173,7 @@ export default class App extends React.Component {
 					<div className="col-lg-12 form">
 						<a className="logo" href="/micdb">
 							<i className="fa fa-microphone fa-lg form__logo" aria-hidden="true" />
-							<h1 className="form__title"> Mic'dDB</h1>
+							<h1 className="form__title"> MicDB</h1>
 						</a>
 						<form action="" className="form__form" onSubmit={this.handleSubmit}>
 							<input type="text" className="form__input" value={this.state.artist} placeholder="search artist..." onChange={this.handleChange} />
