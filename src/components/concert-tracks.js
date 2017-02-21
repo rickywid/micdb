@@ -59,13 +59,13 @@ export default class ConcertTracks extends React.Component {
 				</div>
 				<div className="col-lg-6 concert-track__features">
 					<div className="concert-track__features-item">
-							<h2 className="concert-track__features-header-title"><i className="fa fa-music fa-lg concert-track__features-header-title--browse" aria-hidden="true" />Browse</h2>
-							<p className="concert-track__features-header-description">Listen to your favourite song or album</p>
-					</div>
-					<div className="concert-track__features-item">
 							<h2 className="concert-track__features-header-title"><i className="fa fa-search fa-lg concert-track__features-header-title--search" aria-hidden="true" />Search</h2>
 							<p className="concert-track__features-header-description">Search for your favourite artist</p>
 					</div>
+					<div className="concert-track__features-item">
+							<h2 className="concert-track__features-header-title"><i className="fa fa-music fa-lg concert-track__features-header-title--browse" aria-hidden="true" />Listen</h2>
+							<p className="concert-track__features-header-description">Listen to your favourite song or album</p>
+					</div>					
 					<div className="concert-track__features-item">
 							<h2 className="concert-track__features-header-title"><i className="fa fa-calendar fa-lg concert-track__features-header-title--concerts" aria-hidden="true" />Concerts</h2>
 							<p className="concert-track__features-header-description">Get the latest concert & date information</p>

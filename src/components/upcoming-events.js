@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 
 export default class UpComingEvents extends React.Component {
-	
+
 	renderEvents(event) {
 		return (
 			<li className="upcoming-events__item">
@@ -13,7 +13,7 @@ export default class UpComingEvents extends React.Component {
 					<p className="upcoming-events__item-address">{event.venue.extended_address}</p>
 				</div>
 			</li>
-		)
+		);
 	}
 
 	render() {
